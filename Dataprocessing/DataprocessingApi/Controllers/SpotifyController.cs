@@ -21,6 +21,11 @@ namespace DataprocessingApi.Controllers
             this.database = database;
         }
 
+        /// <summary>
+        /// Returns a set amount of Spotify top song objects
+        /// </summary>
+        /// <param name="limit">Maximum amount of objects to return. Not required.</param>
+        /// <returns>An array of spotify song objects.</returns>
         [HttpGet]
         public IEnumerable<SpotifyTrendingSong> Get(int limit = 25)
         {

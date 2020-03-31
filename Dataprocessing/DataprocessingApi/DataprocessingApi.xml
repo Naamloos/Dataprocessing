@@ -4,5 +4,12 @@
         <name>DataprocessingApi</name>
     </assembly>
     <members>
+        <member name="M:DataprocessingApi.Controllers.SpotifyController.Get(System.Int32)">
+            <summary>
+            Returns a set amount of Spotify top song objects
+            </summary>
+            <param name="limit">Maximum amount of objects to return. Not required.</param>
+            <returns>An array of spotify song objects.</returns>
+        </member>
     </members>
 </doc>

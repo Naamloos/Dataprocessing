@@ -4,7 +4,7 @@ using System;
 
 /*
  * 
- *  Much of this code is thanks to https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core-example.html
+ *  Some of this code is thanks to https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core-example.html
  *  
  */
 

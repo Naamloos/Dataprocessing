@@ -30,7 +30,7 @@ namespace DataprocessingApi.Controllers
         /// <param name="database">database to use</param>
         public YoutubeController(Database database)
         {
-            this.database = database;
+            this.database = database.NewConnection();
         }
 
         /// <summary>
@@ -61,10 +61,11 @@ namespace DataprocessingApi.Controllers
 
             var date = new DateTime(year, month, day);
 
-            return database.Youtube.Where(x => 
-                x.CountryCode.ToLower() == region.ToLower()
-                && x.TrendingDate.Year == year)
-                .OrderBy(x => x.Views)? // Op volgorde van aantal views
+            var reg = region.ToUpper();
+
+            return database.Youtube.OrderByDescending(x => x.Likes).Where(x => 
+                x.CountryCode == reg
+                && x.TrendingDate.Date == date)
                 .Take(limit)? // Maximaal aantal returnen
                 .ToList();
         }

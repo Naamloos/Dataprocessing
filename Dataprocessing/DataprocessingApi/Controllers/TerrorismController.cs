@@ -27,7 +27,7 @@ namespace DataprocessingApi.Controllers
 
         public TerrorismController(Database database, IsoCountries iso)
         {
-            this.database = database;
+            this.database = database.NewConnection();
             this.iso = iso;
         }
 

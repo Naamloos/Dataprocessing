@@ -18,7 +18,7 @@ namespace DataprocessingApi.Controllers
 
         public AvailableRegionsController(Database database, IsoCountries iso)
         {
-            this.database = database;
+            this.database = database.NewConnection();
             this.iso = iso;
         }
 

@@ -34,7 +34,7 @@ namespace DataprocessingApi.Controllers
         /// <param name="database">database to use.</param>
         public SpotifyController(Database database)
         {
-            this.database = database;
+            this.database = database.NewConnection();
         }
 
         /// <summary>

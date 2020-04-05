@@ -3,33 +3,57 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/6.12.0/ajv.min.js"></script>
+    <!-- Local libs -->
     <script src="/include/simpletype-validator.js"></script>
     <script src="/include/xmljson.js"></script>
     <script src="/include/xmlparser.js"></script>
     <script src="/include/xsdoptions.js"></script>
     <script src="/include/xmlschema.js"></script>
-
+    <!-- external libs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/6.12.0/ajv.min.js"></script>
+    <!-- own script file -->
     <script src="/include/script.js"></script>
 </head>
 <body>
     <h1>Dataprocessing front end by Ryan de Jonge @ NHL Stenden</h1>
     <p>We should all be glad I'm not a front end designer.</p>
     <p>API documentation available <a href="/docs/">here</a>.</p>
-    <br /><br /><br />
-    <h1>I guess this should be obvious, but <big>WIP</big></h1>
-    <br />
     <select id="reqtype">
         <option value="application/xml">XML</option>
         <option value="application/json">JSON</option>
     </select>
 
+    <select id="region">
+        <option value="US">United States</option>
+        <option value="MX">Mexico</option>
+        <option value="FR">France</option>
+        <option value="DE">Germany</option>
+        <option value="GB">United Kingdom</option>
+        <option value="CA">Canada</option>
+        <option value="JP">Japan</option>
+    </select>
+
     <input type="date" id="datepicker"
-           value="2017-12-06"
-           min="2017-12-01" max="2018-01-31">
+           value="2017-11-14"
+           min="2017-11-14" max="2018-01-09">
 
     <button id="startbtn" onclick="start();">Start visualization</button>
     <p id="state">Ready</p>
-    <p id="topsong"></p>
+    <h2>Trending songs for selected date:</h2>
+    <p id="topsong" style="display: inline-block"></p>
+    <br />
+    <p>Bars represent the amount of times a song was streamed.</p>
+    <canvas id="spotifychart" style="display: inline-block; max-width: 80vw; max-height: 75vh;"></canvas>
+
+    <h2>Trending videos for selected date:</h2>
+    <p id="topvideo" style="display: inline-block"></p>
+    <br />
+    <p>Bars represent the amount of times a video was liked.</p>
+    <canvas id="youtubechart" style="display: inline-block; max-width: 80vw; max-height: 75vh;"></canvas>
+
+    <p>Bars represent the amount of times a weapon was used.</p>
+    <h2>Type of weapons used in attacks in this country for selected year:</h2>
+    <canvas id="terroristchart" style="display: inline-block; max-width: 80vw; max-height: 75vh;"></canvas>
 </body>
 </html>

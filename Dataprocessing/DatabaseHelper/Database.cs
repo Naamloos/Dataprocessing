@@ -48,5 +48,14 @@ namespace DatabaseHelper
             // Entity for Youtube top lists.
             modelBuilder.Entity<YoutubeTrendingVideo>().HasKey(model => new { model.VideoId, model.TrendingDate, model.CountryCode });
         }
+
+        /// <summary>
+        /// Lazy way to fix handling multiple connections
+        /// </summary>
+        /// <returns></returns>
+        public Database NewConnection()
+        {
+            return new Database(this.server, this.database, this.user, this.password);
+        }
     }
 }

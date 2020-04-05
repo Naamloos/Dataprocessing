@@ -1,48 +1,218 @@
-﻿class ContentSchema
-{
-    constructor(content, schema)
-    {
+﻿Chart.defaults.global.legend.display = false;
+
+class ContentSchema {
+    constructor(content, schema) {
         this.content = content;
         this.schema = schema;
     }
 }
 
-async function httpGET(url)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", url, false);
-    xmlHttp.setRequestHeader("accept", RequestType)
-    xmlHttp.send(null);
-    return new ContentSchema(xmlHttp.responseText, xmlHttp.getResponseHeader("link"));
+// Returns a promise with the results of a request.
+function httpGET(url) {
+    return new Promise((success, fail) => {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", url, true);
+        xmlHttp.setRequestHeader("accept", RequestType)
+        xmlHttp.send(null);
+        var res = null;
+        xmlHttp.onload = function (e) {
+            success(new ContentSchema(xmlHttp.responseText, xmlHttp.getResponseHeader("link")));
+        };
+    });
 }
 
-function getSchema(path)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", path, false);
-    xmlHttp.send(null);
+function getSchema(path) {
+    return new Promise((success, fail) => {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", path, false);
+        xmlHttp.send(null);
 
-    if (RequestType == "application/json")
-    {
-        console.debug(xmlHttp.responseText)
-        return JSON.parse(xmlHttp.responseText);
-    }
-    else if (RequestType == "application/xml")
-    {
-        return xmlHttp.responseText;
-    }
+        if (RequestType == "application/json") {
+            console.debug(xmlHttp.responseText)
+            success(JSON.parse(xmlHttp.responseText));
+        }
+        else if (RequestType == "application/xml") {
+            success(xmlHttp.responseText);
+        } else {
+            fail();
+        }
+    })
 }
 
 var RequestType = "";
+var Region = "US";
 var State;
-var Date;
+var InputDate;
 
-async function start()
-{
+var trendingvideos = null;
+var trendingsongs = null;
+var terrorismevents = null;
+
+function FillSpotifyGraph() {
+    // Spotify Chart.
+    var ctx = document.getElementById('spotifychart').getContext('2d');
+
+    var spotifychart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Top songs by streams',
+                data: [],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            tooltips: {
+                enabled: true
+            },
+            onClick: (c, i) => {
+                var e = i[0];
+                console.log(e._index);
+                var label = spotifychart.data.labels[e._index];
+                console.log(label);
+                // Display associated video as embed
+                // find video with matching title
+                var song = trendingsongs.find(v => v.artist + " - " + v.trackname == label);
+
+                document.getElementById("topsong")
+                    .innerHTML =
+                    "<iframe src=\"https://open.spotify.com/embed/track/"
+                    + song.url.split('/')[4]
+                    + "\" width=\"400\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>";
+            }
+        }
+    });
+
+    trendingsongs.forEach(song => {
+        spotifychart.data.labels.push(song.artist + " - " + song.trackname);
+        spotifychart.data.datasets.forEach((dataset) => {
+            dataset.data.push(song.streams);
+        });
+    });
+
+    spotifychart.update(1000, false);
+}
+
+function FillYoutubeGraph() {
+    // YouTube chart
+    ctx = document.getElementById('youtubechart').getContext('2d');
+
+    var youtubechart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Top videos by likes',
+                data: [],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            onClick: (c, i) => {
+                var e = i[0];
+                console.log(e._index);
+                var label = youtubechart.data.labels[e._index];
+                console.log(label);
+                // Display associated video as embed
+                // find video with matching title
+                var video = trendingvideos.find(v => v.title == label);
+                document.getElementById("topvideo")
+                    .innerHTML =
+                    "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + video.videoid +
+                    "\" frameborder =\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+            }
+        }
+    });
+
+    trendingvideos.forEach(video => {
+        youtubechart.data.labels.push(video.title);
+        youtubechart.data.datasets.forEach((dataset) => {
+            dataset.data.push(video.likes);
+        });
+    });
+
+    youtubechart.update(1000, false);
+}
+
+function FillTerrorismGraph() {
+    // YouTube chart
+    ctx = document.getElementById('terroristchart').getContext('2d');
+
+    var terr_graph = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Amount of times this weapon was used this year',
+                data: [],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }
+        }
+    });
+
+    var types = [];
+
+    terrorismevents.forEach(ev => {
+        // db contains three weaptypes so we'll check it thrice
+        if (types[ev.weaptype1_txt] == null) {
+
+            types[ev.weaptype1_txt] = 1;
+        } else {
+            types[ev.weaptype1_txt] += 1;
+        }
+
+
+        if (types[ev.weaptype2_txt] == null) {
+
+            types[ev.weaptype2_txt] = 1;
+        } else {
+            types[ev.weaptype2_txt] += 1;
+        }
+
+
+        if (types[ev.weaptype3_txt] == null) {
+
+            types[ev.weaptype3_txt] = 1;
+        } else {
+            types[ev.weaptype3_txt] += 1;
+        }
+
+    })
+
+    for (var key in types) {
+        if (key != "null") { // discard null values.
+            console.log(types[key]);
+            terr_graph.data.labels.push(key);
+            terr_graph.data.datasets.forEach((dataset) => {
+                dataset.data.push(types[key]);
+            });
+        }
+    }
+
+    terr_graph.update(1000, false);
+}
+
+function CheckDone() {
+    if (trendingsongs != null && trendingvideos != null && terrorismevents != null) {
+        State.innerHTML = "Done! :)";
+    }
+}
+
+function start() {
     // Remove start button
     document.getElementById("startbtn").remove();
-    Date = document.getElementById("datepicker").value.split("-");
-    console.debug(Date);
+    InputDate = document.getElementById("datepicker").value.split("-");
+    Region = document.getElementById("region").value;
+    console.debug(InputDate);
     State = document.getElementById("state");
     State.innerHTML = "Working...";
 
@@ -53,74 +223,117 @@ async function start()
     RequestType = requestType;
 
     // Do downloads
-    DownloadTopSongs(1, 1, 2017, "us");
-    State.innerHTML = "Done.";
+    DownloadTopSongs("us");
+    DownloadTopVideos("us");
+    DownloadTerrorismEvents("us");
 }
 
-async function DownloadTopSongs(day, month, year, region)
-{
-    var resp = await httpGET("/api/Spotify?day=" + Date[2] + "&month=" + Date[1] + "&year=" + Date[0] + "&region=" + region)
-    console.debug(resp.content);
-    console.debug(resp.schema)
-    var topsongs = await ValidateAndParse(resp);
-    console.log(topsongs[0].artist);
+function DownloadTerrorismEvents(region) {
+    httpGET("/api/Terrorism?day=&year=" + InputDate[0] + "&region=" + Region)
+        .then(function (resp) {
+            console.debug(resp.content);
+            console.debug(resp.schema)
+            ValidateAndParse(resp).then((result) => {
+                console.log(result[0]);
 
-    // ugly thing
-    document.getElementById("topsong")
-        .innerHTML =
-        "<iframe src=\"https://open.spotify.com/embed/track/" + topsongs[0].url.split('/')[4] + "\" width=\"400\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>";
+                if (typeof result !== "undefined") {
+                    terrorismevents = result;
+                    FillTerrorismGraph();
+                } else {
+                    terrorismevents = 1;
+                    // return error
+                }
+
+                CheckDone();
+            });
+        });
 }
 
-async function ValidateAndParse(contentschema)
-{
-    if (RequestType == "application/json")
-    {
-        console.debug(contentschema.schema);
-        var jobject = JSON.parse(contentschema.content);
+function DownloadTopVideos(region) {
+    httpGET("/api/Youtube?day=" + InputDate[2] + "&month=" + InputDate[1] + "&year=" + InputDate[0] + "&region=" + Region)
+        .then(function (resp) {
+            console.debug(resp.content);
+            console.debug(resp.schema)
+            ValidateAndParse(resp).then((result) => {
 
-        // validate JSON
-        var ajv = new Ajv();
-        var valid = ajv.validate(getSchema(contentschema.schema), jobject);
+                if (typeof result !== "undefined") {
+                    trendingvideos = result;
+                    FillYoutubeGraph();
+                } else {
+                    trendingvideos = 1;
+                    document.getElementById("topvideo").innerHTML = "Query unfortunately yielded no results.";
+                }
+                CheckDone();
+            });
+        });
+}
 
-        if (!valid)
-        {
-            console.debug("json not valid!!!");
-            console.debug(ajv.errors);
-            return null;
+function DownloadTopSongs(region) {
+    httpGET("/api/Spotify?day=" + InputDate[2] + "&month=" + InputDate[1] + "&year=" + InputDate[0] + "&region=" + Region)
+        .then(function (resp) {
+            console.debug(resp.content);
+            console.debug(resp.schema)
+
+            ValidateAndParse(resp).then((result) => {
+
+                if (typeof result !== "undefined") {
+                    trendingsongs = result;
+                    FillSpotifyGraph();
+                } else {
+                    trendingsongs = 1;
+                    document.getElementById("topsong").innerHTML = "Query unfortunately yielded no results.";
+                }
+                CheckDone();
+            });
+        });
+}
+
+function ValidateAndParse(contentschema) {
+    return new Promise((success, fail) => {
+        if (RequestType == "application/json") {
+            console.debug(contentschema.schema);
+            var jobject = JSON.parse(contentschema.content);
+
+            getSchema(contentschema.schema).then((result) => {
+                // validate JSON
+                var ajv = new Ajv();
+                var valid = ajv.validate(result, jobject);
+
+                if (!valid) {
+                    console.debug("json not valid!!!");
+                    console.debug(ajv.errors);
+                    fail("invalid json");
+                }
+                else {
+                    console.debug("json valid.");
+                }
+
+                console.debug(jobject);
+                success(jobject);
+            });
         }
-        else
-        {
-            console.debug("json valid.");
-        }
+        else if (RequestType == "application/xml") {
+            getSchema(contentschema.schema).then((result) => {
+                xmlschema(result).validate(contentschema.content).then((validation) => {
+                    if (!validation.valid) {
+                        console.debug("xml not valid!!!");
+                        console.debug(validation.message);
+                        fail("invalid xml");
+                    }
+                    else {
+                        console.debug("xml valid.");
+                    }
 
-        console.debug(jobject);
-        return jobject;
-    }
-    else if (RequestType == "application/xml")
-    {
-        var sch = getSchema(contentschema.schema);
-        console.debug(sch);
-        var validation = await xmlschema(sch).validate(contentschema.content);
-        if (!validation.valid) {
-            console.debug("xml not valid!!!");
-            console.debug(validation.message);
-            return null;
+                    var result = xmljson.toJSON(contentschema.content);
+                    result = result[Object.keys(result)[0]];
+                    result = result[Object.keys(result)[1]];// Go down two levels of object bs
+                    console.debug(result);
+                    success(result);
+                });
+            });
         }
         else {
-            console.debug("xml valid.");
+            fail("Invalid request type");
         }
-        // options for xml to json thingy
-        
-
-        var result = xmljson.toJSON(contentschema.content);
-        result = result[Object.keys(result)[0]];
-        result = result[Object.keys(result)[1]];// Go down two levels of object bs
-        console.debug(result);
-        return result;
-    }
-    else
-    {
-        console.error("Invalid request type");
-        return null;
-    }
+    });
 }

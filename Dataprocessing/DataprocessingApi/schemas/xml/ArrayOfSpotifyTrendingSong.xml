@@ -1,26 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-  
+
   <xs:element name="ArrayOfSpotifyTrendingSong">
     <xs:complexType>
       <xs:sequence>
-        
+
         <xs:element name="SpotifyTrendingSong" maxOccurs="unbounded" minOccurs="0">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Position" type="xs:int"></xs:element>
-              <xs:element name="TrackName" type="xs:string"></xs:element>
-              <xs:element name="Artist" type="xs:string"></xs:element>
-              <xs:element name="Streams" type="xs:long"></xs:element>
-              <xs:element name="Url" type="xs:string"></xs:element>
-              <xs:element name="Date" type="xs:dateTime"></xs:element>
-              <xs:element name="Region" type="xs:string"></xs:element>
+              <xs:element name="position" type="xs:int"></xs:element>
+              <xs:element name="trackname" type="xs:string"></xs:element>
+              <xs:element name="artist" type="xs:string"></xs:element>
+              <xs:element name="streams" type="xs:long"></xs:element>
+              <xs:element name="url" type="xs:string"></xs:element>
+              <xs:element name="date" type="xs:dateTime"></xs:element>
+              <xs:element name="region" type="xs:string"></xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        
+
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
 </xs:schema>

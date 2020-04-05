@@ -139,10 +139,10 @@
               <xs:element type="xs:string" name="scite2"/>
               <xs:element type="xs:string" name="scite3"/>
               <xs:element type="xs:string" name="dbsource"/>
-              <xs:element type="xs:int" name="INT_LOG"/>
-              <xs:element type="xs:int" name="INT_IDEO"/>
-              <xs:element type="xs:int" name="INT_MISC"/>
-              <xs:element type="xs:int" name="INT_ANY"/>
+              <xs:element type="xs:int" name="int_log"/>
+              <xs:element type="xs:int" name="int_ideo"/>
+              <xs:element type="xs:int" name="int_misc"/>
+              <xs:element type="xs:int" name="int_any"/>
               <xs:element type="xs:string" name="related"/>
 
             </xs:sequence>

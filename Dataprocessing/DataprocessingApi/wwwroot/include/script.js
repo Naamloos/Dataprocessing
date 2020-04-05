@@ -35,11 +35,14 @@ function getSchema(path)
 
 var RequestType = "";
 var State;
+var Date;
 
 async function start()
 {
     // Remove start button
     document.getElementById("startbtn").remove();
+    Date = document.getElementById("datepicker").value.split("-");
+    console.debug(Date);
     State = document.getElementById("state");
     State.innerHTML = "Working...";
 
@@ -56,11 +59,16 @@ async function start()
 
 async function DownloadTopSongs(day, month, year, region)
 {
-    var resp = await httpGET("/api/Spotify?day=" + day + "&month=" + month + "&year=" + year + "&region=" + region)
+    var resp = await httpGET("/api/Spotify?day=" + Date[2] + "&month=" + Date[1] + "&year=" + Date[0] + "&region=" + region)
     console.debug(resp.content);
     console.debug(resp.schema)
     var topsongs = await ValidateAndParse(resp);
-    console.log(topsongs[0].Artist);
+    console.log(topsongs[0].artist);
+
+    // ugly thing
+    document.getElementById("topsong")
+        .innerHTML =
+        "<iframe src=\"https://open.spotify.com/embed/track/" + topsongs[0].url.split('/')[4] + "\" width=\"400\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>";
 }
 
 async function ValidateAndParse(contentschema)

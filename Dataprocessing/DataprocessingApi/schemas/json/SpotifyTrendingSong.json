@@ -4,7 +4,7 @@
     "position": {
       "type": "integer"
     },
-    "trackName": {
+    "trackname": {
       "type": "string"
     },
     "artist": {
@@ -25,7 +25,7 @@
   },
   "required": [
     "position",
-    "trackName",
+    "trackname",
     "artist",
     "streams",
     "url",

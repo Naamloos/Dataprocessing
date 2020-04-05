@@ -394,16 +394,16 @@
         "dbsource": {
           "type": "string"
         },
-        "inT_LOG": {
+        "int_log": {
           "type": "integer"
         },
-        "inT_IDEO": {
+        "int_ideo": {
           "type": "integer"
         },
-        "inT_MISC": {
+        "int_misc": {
           "type": "integer"
         },
-        "inT_ANY": {
+        "int_any": {
           "type": "integer"
         },
         "related": {
@@ -541,10 +541,10 @@
         "scite2",
         "scite3",
         "dbsource",
-        "inT_LOG",
-        "inT_IDEO",
-        "inT_MISC",
-        "inT_ANY",
+        "int_log",
+        "int_ideo",
+        "int_misc",
+        "int_any",
         "related"
       ],
       "title": "TerrorismEvent",

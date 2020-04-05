@@ -9,23 +9,23 @@
           <xs:complexType>
             <xs:sequence>
 
-              <xs:element name="VideoId" type="xs:string"></xs:element>
-              <xs:element name="TrendingDate" type="xs:dateTime"></xs:element>
-              <xs:element name="Title" type="xs:string"></xs:element>
-              <xs:element name="ChannelTitle" type="xs:string"></xs:element>
-              <xs:element name="CategoryId" type="xs:int"></xs:element>
-              <xs:element name="PublishTime" type="xs:dateTime"></xs:element>
-              <xs:element name="Tags" type="xs:string"></xs:element>
-              <xs:element name="Views" type="xs:int"></xs:element>
-              <xs:element name="Likes" type="xs:int"></xs:element>
-              <xs:element name="Dislikes" type="xs:int"></xs:element>
-              <xs:element name="CommentCount" type="xs:int"></xs:element>
-              <xs:element name="ThumbnailLink" type="xs:string"></xs:element>
-              <xs:element name="CommentsDisabled" type="xs:boolean"></xs:element>
-              <xs:element name="RatingsDisabled" type="xs:boolean"></xs:element>
-              <xs:element name="VideoErrorOrRemoved" type="xs:boolean"></xs:element>
-              <xs:element name="Description" type="xs:string"></xs:element>
-              <xs:element name="CountryCode" type="xs:string"></xs:element>
+              <xs:element name="videoid" type="xs:string"></xs:element>
+              <xs:element name="trendingdate" type="xs:dateTime"></xs:element>
+              <xs:element name="title" type="xs:string"></xs:element>
+              <xs:element name="channeltitle" type="xs:string"></xs:element>
+              <xs:element name="categoryid" type="xs:int"></xs:element>
+              <xs:element name="publishtime" type="xs:dateTime"></xs:element>
+              <xs:element name="tags" type="xs:string"></xs:element>
+              <xs:element name="views" type="xs:int"></xs:element>
+              <xs:element name="likes" type="xs:int"></xs:element>
+              <xs:element name="dislikes" type="xs:int"></xs:element>
+              <xs:element name="commentcount" type="xs:int"></xs:element>
+              <xs:element name="thumbnaillink" type="xs:string"></xs:element>
+              <xs:element name="commentsdisabled" type="xs:boolean"></xs:element>
+              <xs:element name="ratingsdisabled" type="xs:boolean"></xs:element>
+              <xs:element name="videoerrororremoved" type="xs:boolean"></xs:element>
+              <xs:element name="description" type="xs:string"></xs:element>
+              <xs:element name="countrycode" type="xs:string"></xs:element>
 
             </xs:sequence>
           </xs:complexType>

@@ -4,22 +4,22 @@
   "items": [
     {
       "properties": {
-        "videoId": {
+        "videoid": {
           "type": "string"
         },
-        "trendingDate": {
+        "trendingdate": {
           "type": "string"
         },
         "title": {
           "type": "string"
         },
-        "channelTitle": {
+        "channeltitle": {
           "type": "string"
         },
-        "categoryId": {
+        "categoryid": {
           "type": "integer"
         },
-        "publishTime": {
+        "publishtime": {
           "type": "string"
         },
         "tags": {
@@ -34,46 +34,46 @@
         "dislikes": {
           "type": "integer"
         },
-        "commentCount": {
+        "commentcount": {
           "type": "integer"
         },
-        "thumbnailLink": {
+        "thumbnaillink": {
           "type": "string"
         },
-        "commentsDisabled": {
+        "commentsdisabled": {
           "type": "boolean"
         },
-        "ratingsDisabled": {
+        "ratingsdisabled": {
           "type": "boolean"
         },
-        "videoErrorOrRemoved": {
+        "videoerrororremoved": {
           "type": "boolean"
         },
         "description": {
           "type": "string"
         },
-        "countryCode": {
+        "countrycode": {
           "type": "string"
         }
       },
       "required": [
-        "videoId",
-        "trendingDate",
+        "videoid",
+        "trendingdate",
         "title",
-        "channelTitle",
-        "categoryId",
-        "publishTime",
+        "channeltitle",
+        "categoryid",
+        "publishtime",
         "tags",
         "views",
         "likes",
         "dislikes",
-        "commentCount",
-        "thumbnailLink",
-        "commentsDisabled",
-        "ratingsDisabled",
-        "videoErrorOrRemoved",
+        "commentcount",
+        "thumbnaillink",
+        "commentsdisabled",
+        "ratingsdisabled",
+        "videoerrororremoved",
         "description",
-        "countryCode"
+        "countrycode"
       ],
       "title": "YoutubeTrendingVideo",
       "type": "object"

@@ -154,10 +154,23 @@ namespace DatabaseHelper.Models
         public string scite2 { get; set; }
         public string scite3 { get; set; }
         public string dbsource { get; set; }
+
+        [XmlElement(ElementName = "int_log")]
+        [JsonPropertyName("int_log")]
         public int? INT_LOG { get; set; }
+
+        [XmlElement(ElementName = "int_ideo")]
+        [JsonPropertyName("int_ideo")]
         public int? INT_IDEO { get; set; }
+
+        [XmlElement(ElementName = "int_misc")]
+        [JsonPropertyName("int_misc")]
         public int? INT_MISC { get; set; }
+
+        [XmlElement(ElementName = "int_any")]
+        [JsonPropertyName("int_any")]
         public int? INT_ANY { get; set; }
+
         public string related { get; set; }
     }
 }

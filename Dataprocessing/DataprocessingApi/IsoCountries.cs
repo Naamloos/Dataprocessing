@@ -9,14 +9,24 @@ using System.Threading.Tasks;
 
 namespace DataprocessingApi
 {
+    /// <summary>
+    /// Helper class to convert ISO country codes
+    /// </summary>
     public class IsoCountries
     {
+        /// <summary>
+        /// List of countries
+        /// </summary>
         public Dictionary<string, string> Countries { get; private set; } = new Dictionary<string, string>();
         private IsoCountries()
         {
 
         }
 
+        /// <summary>
+        /// Loads the iso 3166 json
+        /// </summary>
+        /// <returns>A new IsoCountries object</returns>
         public static IsoCountries Load()
         {
             var iso = new IsoCountries();

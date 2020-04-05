@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
@@ -28,23 +27,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="schemas\xml\ArrayOfSpotifyTrendingSong.xml">
+    <None Update="schemas\xml\ArrayOfSpotifyTrendingSong.xsd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="schemas\xml\ArrayOfTerrorismEvent.xml">
+    <None Update="schemas\xml\ArrayOfTerrorismEvent.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="schemas\xml\ArrayOfYoutubeTrendingVideo.xml">
+    <None Update="schemas\xml\ArrayOfYoutubeTrendingVideo.xsd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="schemas\xml\SpotifyTrendingSong.xml">
+    <None Update="schemas\xml\SpotifyTrendingSong.xsd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="schemas\xml\TerrorismEvent.xml">
+    <None Update="schemas\xml\TerrorismEvent.xsd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="schemas\xml\YoutubeTrendingVideo.xml">
+    <None Update="schemas\xml\YoutubeTrendingVideo.xsd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

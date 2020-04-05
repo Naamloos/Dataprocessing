@@ -18,13 +18,18 @@ namespace DataprocessingApi.Controllers
     public class TerrorismController : Controller
     {
         const string JSON_SCHEMA = "/schemas/json/TerrorismEvent.json";
-        const string XML_SCHEMA = "/schemas/xml/TerrorismEvent.xml";
+        const string XML_SCHEMA = "/schemas/xml/TerrorismEvent.xsd";
         const string JSON_ARRAY_SCHEMA = "/schemas/json/ArrayOfTerrorismEvent.json";
-        const string XML_ARRAY_SCHEMA = "/schemas/xml/ArrayOfTerrorismEvent.xml";
+        const string XML_ARRAY_SCHEMA = "/schemas/xml/ArrayOfTerrorismEvent.xsd";
 
         private Database database;
         private IsoCountries iso; // This one is for translating ISO countries.
 
+        /// <summary>
+        /// Constructs a new TerrorismController.
+        /// </summary>
+        /// <param name="database">Database to use</param>
+        /// <param name="iso">Iso country converter</param>
         public TerrorismController(Database database, IsoCountries iso)
         {
             this.database = database.NewConnection();

@@ -7,22 +7,41 @@ using Newtonsoft.Json;
 
 namespace DataprocessingApi
 {
+    /// <summary>
+    /// Represents a Config file.
+    /// </summary>
     public class ConfigFile
     {
         private ConfigFile() { }
 
+        /// <summary>
+        /// Database Host
+        /// </summary>
         [JsonProperty("dbhost")]
         public string DbHost { get; private set; } = "localhost";
 
+        /// <summary>
+        /// Database Name
+        /// </summary>
         [JsonProperty("dbname")]
         public string DbName { get; private set; } = "dataprocessing";
 
+        /// <summary>
+        /// Database user
+        /// </summary>
         [JsonProperty("dbuser")]
         public string DbUser { get; private set; } = "root";
 
+        /// <summary>
+        /// Database password
+        /// </summary>
         [JsonProperty("dbpass")]
         public string DbPass { get; private set; } = "";
 
+        /// <summary>
+        /// Loads the config file.
+        /// </summary>
+        /// <returns></returns>
         public static ConfigFile Load()
         {
             if(!File.Exists("config.json"))

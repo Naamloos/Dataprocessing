@@ -18,9 +18,9 @@ namespace DataprocessingApi.Controllers
     public class YoutubeController : ControllerBase
     {
         const string JSON_SCHEMA = "/schemas/json/YoutubeTrendingVideo.json";
-        const string XML_SCHEMA = "/schemas/xml/YoutubeTrendingVideo.xml";
+        const string XML_SCHEMA = "/schemas/xml/YoutubeTrendingVideo.xsd";
         const string JSON_ARRAY_SCHEMA = "/schemas/json/ArrayOfYoutubeTrendingVideo.json";
-        const string XML_ARRAY_SCHEMA = "/schemas/xml/ArrayOfYoutubeTrendingVideo.xml";
+        const string XML_ARRAY_SCHEMA = "/schemas/xml/ArrayOfYoutubeTrendingVideo.xsd";
 
         private Database database;
 

@@ -7,21 +7,15 @@ using System.Threading.Tasks;
 
 namespace DataprocessingApi.Controllers
 {
+    /// <summary>
+    /// Available regions API controller
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     [Consumes("application/xml", "application/json")]
     [Produces("application/xml", "application/json")] // Restrict requests to XML and JSON
     public class AvailableRegionsController
     {
-        private Database database;
-        private IsoCountries iso;
-
-        public AvailableRegionsController(Database database, IsoCountries iso)
-        {
-            this.database = database.NewConnection();
-            this.iso = iso;
-        }
-
         /// <summary>
         /// Returns all country codes that have values in all tables. This is especially useful for visualization ;^)
         /// </summary>

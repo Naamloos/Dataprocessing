@@ -4,6 +4,49 @@
         <name>DataprocessingApi</name>
     </assembly>
     <members>
+        <member name="T:DataprocessingApi.ConfigFile">
+            <summary>
+            Represents a Config file.
+            </summary>
+        </member>
+        <member name="P:DataprocessingApi.ConfigFile.DbHost">
+            <summary>
+            Database Host
+            </summary>
+        </member>
+        <member name="P:DataprocessingApi.ConfigFile.DbName">
+            <summary>
+            Database Name
+            </summary>
+        </member>
+        <member name="P:DataprocessingApi.ConfigFile.DbUser">
+            <summary>
+            Database user
+            </summary>
+        </member>
+        <member name="P:DataprocessingApi.ConfigFile.DbPass">
+            <summary>
+            Database password
+            </summary>
+        </member>
+        <member name="M:DataprocessingApi.ConfigFile.Load">
+            <summary>
+            Loads the config file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DataprocessingApi.Controllers.AvailableRegionsController">
+            <summary>
+            Available regions API controller
+            </summary>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.AvailableRegionsController.#ctor(DatabaseHelper.Database,DataprocessingApi.IsoCountries)">
+            <summary>
+            Constructs a new AvailableRegionsController
+            </summary>
+            <param name="database">Database to use</param>
+            <param name="iso">Iso Country converter</param>
+        </member>
         <member name="M:DataprocessingApi.Controllers.AvailableRegionsController.Get">
             <summary>
             Returns all country codes that have values in all tables. This is especially useful for visualization ;^)
@@ -30,7 +73,7 @@
             <param name="year">Year</param>
             <param name="region">Region</param>
             <param name="limit">OPTIONAL Max amounts of songs to return</param>
-            <returns></returns>
+            <returns>A list of songs</returns>
         </member>
         <member name="M:DataprocessingApi.Controllers.SpotifyController.Delete(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
@@ -41,7 +84,7 @@
             <param name="month">Month the song was trending.</param>
             <param name="year">Year the song was trending.</param>
             <param name="region">Region the song was trending in.</param>
-            <returns>The song you deleted or 409 when that value does not exist.</returns>
+            <returns>The song you deleted.</returns>
         </member>
         <member name="M:DataprocessingApi.Controllers.SpotifyController.Put(DatabaseHelper.Models.SpotifyTrendingSong)">
             <summary>
@@ -61,6 +104,13 @@
             <summary>
             Terrorism controller
             </summary>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.TerrorismController.#ctor(DatabaseHelper.Database,DataprocessingApi.IsoCountries)">
+            <summary>
+            Constructs a new TerrorismController.
+            </summary>
+            <param name="database">Database to use</param>
+            <param name="iso">Iso country converter</param>
         </member>
         <member name="M:DataprocessingApi.Controllers.TerrorismController.Get(System.String,System.Int32)">
             <summary>
@@ -137,6 +187,81 @@
             </summary>
             <param name="newVideo">New video to add.</param>
             <returns>The video you added.</returns>
+        </member>
+        <member name="T:DataprocessingApi.Filters.CustomXmlSchemaFilter">
+            <summary>
+            Custom XML schema filter to work arround Swagger docs issues
+            </summary>
+        </member>
+        <member name="M:DataprocessingApi.Filters.CustomXmlSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+            <summary>
+            Applies schema
+            </summary>
+            <param name="schema">open api schema</param>
+            <param name="context">context</param>
+        </member>
+        <member name="T:DataprocessingApi.IsoCountries">
+            <summary>
+            Helper class to convert ISO country codes
+            </summary>
+        </member>
+        <member name="P:DataprocessingApi.IsoCountries.Countries">
+            <summary>
+            List of countries
+            </summary>
+        </member>
+        <member name="M:DataprocessingApi.IsoCountries.Load">
+            <summary>
+            Loads the iso 3166 json
+            </summary>
+            <returns>A new IsoCountries object</returns>
+        </member>
+        <member name="T:DataprocessingApi.Program">
+            <summary>
+            Main class.
+            </summary>
+        </member>
+        <member name="M:DataprocessingApi.Program.Main(System.String[])">
+            <summary>
+            Main method
+            </summary>
+            <param name="args">Command line arguments.</param>
+        </member>
+        <member name="M:DataprocessingApi.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Creades a host builder.
+            </summary>
+            <param name="args">Command line arguments</param>
+            <returns>A new hostbuilder</returns>
+        </member>
+        <member name="T:DataprocessingApi.Startup">
+            <summary>
+            ASP.Net Core Startup class.
+            </summary>
+        </member>
+        <member name="M:DataprocessingApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructs a new Startup object.
+            </summary>
+            <param name="configuration">Configuration to use.</param>
+        </member>
+        <member name="P:DataprocessingApi.Startup.Configuration">
+            <summary>
+            Current config.
+            </summary>
+        </member>
+        <member name="M:DataprocessingApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures Services.
+            </summary>
+            <param name="services">Servicecollection to use.</param>
+        </member>
+        <member name="M:DataprocessingApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configures the HTTP pipeline.
+            </summary>
+            <param name="app">appbuilder to use.</param>
+            <param name="env">environment to use.</param>
         </member>
     </members>
 </doc>

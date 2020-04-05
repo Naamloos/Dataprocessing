@@ -22,11 +22,11 @@ namespace DataprocessingApi.Controllers
     public class SpotifyController : ControllerBase
     {
         const string JSON_SCHEMA = "/schemas/json/SpotifyTrendingSong.json";
-        const string XML_SCHEMA = "/schemas/xml/SpotifyTrendingSong.xml";
+        const string XML_SCHEMA = "/schemas/xml/SpotifyTrendingSong.xsd";
         const string JSON_ARRAY_SCHEMA = "/schemas/json/ArrayOfSpotifyTrendingSong.json";
-        const string XML_ARRAY_SCHEMA = "/schemas/xml/ArrayOfSpotifyTrendingSong.xml";
+        const string XML_ARRAY_SCHEMA = "/schemas/xml/ArrayOfSpotifyTrendingSong.xsd";
 
-        private Database database;
+        private readonly Database database;
 
         /// <summary>
         /// Creates a new SpotifyController
@@ -45,7 +45,7 @@ namespace DataprocessingApi.Controllers
         /// <param name="year">Year</param>
         /// <param name="region">Region</param>
         /// <param name="limit">OPTIONAL Max amounts of songs to return</param>
-        /// <returns></returns>
+        /// <returns>A list of songs</returns>
         [HttpGet]
         public ActionResult<IEnumerable<SpotifyTrendingSong>> Get(int day, int month, int year, string region, int limit = 25)
         {
@@ -70,7 +70,7 @@ namespace DataprocessingApi.Controllers
                 .Where(x => 
                 x.Date == date
                 && x.Region.ToLower() == region.ToLower()
-                && x.Position <= 25)?.ToList();
+                && x.Position <= limit)?.ToList();
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace DataprocessingApi.Controllers
         /// <param name="month">Month the song was trending.</param>
         /// <param name="year">Year the song was trending.</param>
         /// <param name="region">Region the song was trending in.</param>
-        /// <returns>The song you deleted or 409 when that value does not exist.</returns>
+        /// <returns>The song you deleted.</returns>
         [HttpDelete]
         public ActionResult<SpotifyTrendingSong> Delete(int position, int day, int month, int year, string region)
         {

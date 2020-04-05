@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Web.Http;
 using System.Xml.Serialization;
 using DatabaseHelper;
 using DatabaseHelper.Models;
@@ -22,11 +21,19 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace DataprocessingApi
 {
+    /// <summary>
+    /// ASP.Net Core Startup class.
+    /// </summary>
     public class Startup
     {
         private Database database;
         private ConfigFile configFile;
         private IsoCountries isoCountries;
+
+        /// <summary>
+        /// Constructs a new Startup object.
+        /// </summary>
+        /// <param name="configuration">Configuration to use.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -39,9 +46,15 @@ namespace DataprocessingApi
             isoCountries = IsoCountries.Load();
         }
 
+        /// <summary>
+        /// Current config.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Configures Services.
+        /// </summary>
+        /// <param name="services">Servicecollection to use.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -81,12 +94,11 @@ namespace DataprocessingApi
             });
         }
 
-        public void Register(HttpConfiguration config)
-        {
-            config.Formatters.XmlFormatter.UseXmlSerializer = true;
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the HTTP pipeline.
+        /// </summary>
+        /// <param name="app">appbuilder to use.</param>
+        /// <param name="env">environment to use.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // Deafult aspnet stuff

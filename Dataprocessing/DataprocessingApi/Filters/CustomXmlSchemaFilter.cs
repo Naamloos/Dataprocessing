@@ -14,12 +14,20 @@ using System.Threading.Tasks;
 
 namespace DataprocessingApi.Filters
 {
+    /// <summary>
+    /// Custom XML schema filter to work arround Swagger docs issues
+    /// </summary>
     public class CustomXmlSchemaFilter : ISchemaFilter
     {
         private const string _SCHEMA_ARRAY_TYPE = "array";
         private const string _SCHEMA_STRING_TYPE = "string";
         private const string _PREFIX_ARRAY = "ArrayOf";
 
+        /// <summary>
+        /// Applies schema
+        /// </summary>
+        /// <param name="schema">open api schema</param>
+        /// <param name="context">context</param>
         public void Apply(OpenApiSchema schema, SchemaFilterContext context)
         {
             if (context.Type.IsValueType)

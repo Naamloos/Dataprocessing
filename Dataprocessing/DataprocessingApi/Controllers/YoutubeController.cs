@@ -22,7 +22,7 @@ namespace DataprocessingApi.Controllers
         const string JSON_ARRAY_SCHEMA = "/schemas/json/ArrayOfYoutubeTrendingVideo.json";
         const string XML_ARRAY_SCHEMA = "/schemas/xml/ArrayOfYoutubeTrendingVideo.xsd";
 
-        private Database database;
+        private readonly Database database;
 
         /// <summary>
         /// Constructs a new YouTube controller

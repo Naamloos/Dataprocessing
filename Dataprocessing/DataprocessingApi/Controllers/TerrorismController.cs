@@ -22,8 +22,8 @@ namespace DataprocessingApi.Controllers
         const string JSON_ARRAY_SCHEMA = "/schemas/json/ArrayOfTerrorismEvent.json";
         const string XML_ARRAY_SCHEMA = "/schemas/xml/ArrayOfTerrorismEvent.xsd";
 
-        private Database database;
-        private IsoCountries iso; // This one is for translating ISO countries.
+        private readonly Database database;
+        private readonly IsoCountries iso; // This one is for translating ISO countries.
 
         /// <summary>
         /// Constructs a new TerrorismController.

@@ -26,9 +26,9 @@ namespace DataprocessingApi
     /// </summary>
     public class Startup
     {
-        private Database database;
-        private ConfigFile configFile;
-        private IsoCountries isoCountries;
+        private readonly Database database;
+        private readonly ConfigFile configFile;
+        private readonly IsoCountries isoCountries;
 
         /// <summary>
         /// Constructs a new Startup object.
@@ -37,7 +37,7 @@ namespace DataprocessingApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            // This generates a config file that MAY be invalid for the current setup. Check config.json.
+            // This generates a config file. Check config.json.
             configFile = ConfigFile.Load();
 
             // connecting to database.

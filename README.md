@@ -102,3 +102,17 @@ The API documentation is available at `/docs` when you run the program.
 
 #### Schema's
 Local paths to the XML/JSON schema files will be provided in the `link` header.
+
+## Libraries
+The following libraries were used in this project.
+
+### .NET Core
+- [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1)
+- [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
+- [EF Core MySQL Connector](https://dev.mysql.com/doc/connector-net/en/connector-net-entityframework-core.html)
+- [Swashbuckle Swagger](https://github.com/domaindrivendev/Swashbuckle)
+
+### Javascript
+- [Ajv](https://github.com/epoberezkin/ajv)
+- [xmlschema.js](https://github.com/paulwardrip/xmlschema.js)
+- [Chart.js](https://chartjs.org/)

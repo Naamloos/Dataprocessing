@@ -40,13 +40,6 @@
             Available regions API controller
             </summary>
         </member>
-        <member name="M:DataprocessingApi.Controllers.AvailableRegionsController.#ctor(DatabaseHelper.Database,DataprocessingApi.IsoCountries)">
-            <summary>
-            Constructs a new AvailableRegionsController
-            </summary>
-            <param name="database">Database to use</param>
-            <param name="iso">Iso Country converter</param>
-        </member>
         <member name="M:DataprocessingApi.Controllers.AvailableRegionsController.Get">
             <summary>
             Returns all country codes that have values in all tables. This is especially useful for visualization ;^)

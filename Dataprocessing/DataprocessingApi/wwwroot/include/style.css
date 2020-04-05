@@ -3,23 +3,28 @@
     padding: 0;
 }
 
-.topvideo
-{
-    margin: auto;
-}
-
-.topsong{
-    margin: auto;
-}
 html, body {
     width: 100%;
     height: 100%;
     font-family: 'Roboto', sans-serif;
 }
 
-h2{
+.topvideo
+{
+    margin: auto;
+}
+
+.topsong
+{
+    margin: auto;
+}
+
+h2
+{
     padding-top: 15px;
 }
-p{
+
+p
+{
     padding-left: 15px;
 }

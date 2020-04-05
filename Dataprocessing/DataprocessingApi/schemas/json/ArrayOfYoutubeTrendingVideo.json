@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "array",
+  "items": [
+    {
+      "properties": {
+        "videoId": {
+          "type": "string"
+        },
+        "trendingDate": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "channelTitle": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "integer"
+        },
+        "publishTime": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "string"
+        },
+        "views": {
+          "type": "integer"
+        },
+        "likes": {
+          "type": "integer"
+        },
+        "dislikes": {
+          "type": "integer"
+        },
+        "commentCount": {
+          "type": "integer"
+        },
+        "thumbnailLink": {
+          "type": "string"
+        },
+        "commentsDisabled": {
+          "type": "boolean"
+        },
+        "ratingsDisabled": {
+          "type": "boolean"
+        },
+        "videoErrorOrRemoved": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "videoId",
+        "trendingDate",
+        "title",
+        "channelTitle",
+        "categoryId",
+        "publishTime",
+        "tags",
+        "views",
+        "likes",
+        "dislikes",
+        "commentCount",
+        "thumbnailLink",
+        "commentsDisabled",
+        "ratingsDisabled",
+        "videoErrorOrRemoved",
+        "description",
+        "countryCode"
+      ],
+      "title": "YoutubeTrendingVideo",
+      "type": "object"
+    }
+  ]
+}

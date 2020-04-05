@@ -4,12 +4,139 @@
         <name>DataprocessingApi</name>
     </assembly>
     <members>
-        <member name="M:DataprocessingApi.Controllers.SpotifyController.Get(System.Int32)">
+        <member name="M:DataprocessingApi.Controllers.AvailableRegionsController.Get">
             <summary>
-            Returns a set amount of Spotify top song objects
+            Returns all country codes that have values in all tables. This is especially useful for visualization ;^)
             </summary>
-            <param name="limit">Maximum amount of objects to return. Not required.</param>
-            <returns>An array of spotify song objects.</returns>
+            <returns>An array of strings representing countries</returns>
+        </member>
+        <member name="T:DataprocessingApi.Controllers.SpotifyController">
+            <summary>
+            Spotify Controller
+            </summary>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.SpotifyController.#ctor(DatabaseHelper.Database)">
+            <summary>
+            Creates a new SpotifyController
+            </summary>
+            <param name="database">database to use.</param>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.SpotifyController.Get(System.Int32,System.Int32,System.Int32,System.String,System.Int32)">
+            <summary>
+            Gets all trending songs for a region on a specific day.
+            </summary>
+            <param name="day">Day of month</param>
+            <param name="month">Month of year</param>
+            <param name="year">Year</param>
+            <param name="region">Region</param>
+            <param name="limit">OPTIONAL Max amounts of songs to return</param>
+            <returns></returns>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.SpotifyController.Delete(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Deletes a top song.
+            </summary>
+            <param name="position">Position the song is on.</param>
+            <param name="day">Day the song was trending.</param>
+            <param name="month">Month the song was trending.</param>
+            <param name="year">Year the song was trending.</param>
+            <param name="region">Region the song was trending in.</param>
+            <returns>The song you deleted or 409 when that value does not exist.</returns>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.SpotifyController.Put(DatabaseHelper.Models.SpotifyTrendingSong)">
+            <summary>
+            Updates a song in the database.
+            </summary>
+            <param name="updatedSong">The new trending song.</param>
+            <returns>Returns the old song object on success.</returns>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.SpotifyController.Post(DatabaseHelper.Models.SpotifyTrendingSong)">
+            <summary>
+            Posts a new song to the database if no song with that position/date/ragion combo exists yet. Else returns 409.
+            </summary>
+            <param name="newSong">New song to add</param>
+            <returns>Returns the new song on success.</returns>
+        </member>
+        <member name="T:DataprocessingApi.Controllers.TerrorismController">
+            <summary>
+            Terrorism controller
+            </summary>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.TerrorismController.Get(System.String,System.Int32)">
+            <summary>
+            Gets all terrorism events in a specific region in a specific year.
+            </summary>
+            <param name="region">Region the event happened in.</param>
+            <param name="year">Year it happened.</param>
+            <returns>A terrorism event.</returns>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.TerrorismController.Delete(System.Int32)">
+            <summary>
+            Deletes an event from the Database.
+            </summary>
+            <param name="eventid">ID of the event.</param>
+            <returns>The vent you deleted.</returns>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.TerrorismController.Put(DatabaseHelper.Models.TerrorismEvent)">
+            <summary>
+            Updates an event in the database.
+            </summary>
+            <param name="updatedEvent">Your updated event.</param>
+            <returns>The old version of your updated event.</returns>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.TerrorismController.Post(DatabaseHelper.Models.TerrorismEvent)">
+            <summary>
+            Adds a new event to the database.
+            </summary>
+            <param name="newEvent">The new event you want to add.</param>
+            <returns>Your new event.</returns>
+        </member>
+        <member name="T:DataprocessingApi.Controllers.YoutubeController">
+            <summary>
+            YouTube controller
+            </summary>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.YoutubeController.#ctor(DatabaseHelper.Database)">
+            <summary>
+            Constructs a new YouTube controller
+            </summary>
+            <param name="database">database to use</param>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.YoutubeController.Get(System.Int32,System.Int32,System.Int32,System.String,System.Int32)">
+            <summary>
+            Returns all top videos for a specific region on a specific date.
+            </summary>
+            <param name="day">Day of the month</param>
+            <param name="month">Month of the year</param>
+            <param name="year">Year</param>
+            <param name="region">Region to return top songs for.</param>
+            <param name="limit">OPTIONAL Max amount of songs to return.</param>
+            <returns>An array of Spotify Trending Song objects.</returns>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.YoutubeController.Delete(System.String,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Deletes a trending video from teh Database.
+            </summary>
+            <param name="videoid">ID of video to remove.</param>
+            <param name="day">Day the video was trending.</param>
+            <param name="month">Month the video was trending.</param>
+            <param name="year">Year the video was trending.</param>
+            <param name="region">Region the video was trending in.</param>
+            <returns>The video you just deleted.</returns>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.YoutubeController.Put(DatabaseHelper.Models.YoutubeTrendingVideo)">
+            <summary>
+            Updates a trending video in the database.
+            </summary>
+            <param name="updatedVideo">Video to update.</param>
+            <returns>The old video you updated.</returns>
+        </member>
+        <member name="M:DataprocessingApi.Controllers.YoutubeController.Post(DatabaseHelper.Models.YoutubeTrendingVideo)">
+            <summary>
+            Adds a new trending video to the database.
+            </summary>
+            <param name="newVideo">New video to add.</param>
+            <returns>The video you added.</returns>
         </member>
     </members>
 </doc>

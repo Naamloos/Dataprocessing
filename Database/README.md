@@ -7,8 +7,8 @@ The datasets can be found at the following pages on *Kaggle*.
 - [YouTube](https://www.kaggle.com/datasnaek/youtube-new)
 - [Global Terrorism Database](https://www.kaggle.com/START-UMD/gtd)
 
-## I want the full database!!!1
-Contact me and we'll sort stuff out.
+## Preset database
+Lucky you! I've set up the database myself and a dump can be found on my [OneDrive](https://newuniversity-my.sharepoint.com/:u:/g/personal/ryan_de_jonge_student_nhlstenden_com/Ee6t_UjXR7VKoG89icNRFwoBll7kllj1FewMUNaHtzY_9A?e=0cYXSX). I recommend not importing this with phpmyadmin but instead importing it via the command line or SQL queries. It is **big**.
 
 ## Importing using SQL
 Use the following scripts to import the datasets. Please do not that I am not entirely sure whether these were the right queries, as I just looked them up in some chat logs from today.

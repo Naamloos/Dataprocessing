@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="ArrayOfTerrorismEvent">
+    <xs:complexType>
+      <xs:sequence>
+
+        <xs:element name="TerrorismEvent" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+
+              <xs:element type="xs:long" name="eventid"/>
+              <xs:element type="xs:short" name="iyear"/>
+              <xs:element type="xs:int" name="imonth"/>
+              <xs:element type="xs:int" name="iday"/>
+              <xs:element type="xs:string" name="approxdate"/>
+              <xs:element type="xs:string" name="extended"/>
+              <xs:element type="xs:string" name="resolution"/>
+              <xs:element type="xs:short" name="country"/>
+              <xs:element type="xs:string" name="country_txt"/>
+              <xs:element type="xs:int" name="region"/>
+              <xs:element type="xs:string" name="region_txt"/>
+              <xs:element type="xs:string" name="provstate"/>
+              <xs:element type="xs:string" name="city"/>
+              <xs:element type="xs:float" name="latitude"/>
+              <xs:element type="xs:float" name="longitude"/>
+              <xs:element type="xs:int" name="specificity"/>
+              <xs:element type="xs:int" name="vicinity"/>
+              <xs:element type="xs:string" name="location"/>
+              <xs:element type="xs:string" name="summary"/>
+              <xs:element type="xs:int" name="crit1"/>
+              <xs:element type="xs:int" name="crit2"/>
+              <xs:element type="xs:int" name="crit3"/>
+              <xs:element type="xs:int" name="doubtterr"/>
+              <xs:element type="xs:int" name="alternative"/>
+              <xs:element type="xs:string" name="alternative_txt"/>
+              <xs:element type="xs:string" name="multiple"/>
+              <xs:element type="xs:string" name="success"/>
+              <xs:element type="xs:string" name="suicide"/>
+              <xs:element type="xs:int" name="attacktype1"/>
+              <xs:element type="xs:string" name="attacktype1_txt"/>
+              <xs:element type="xs:int" name="attacktype2"/>
+              <xs:element type="xs:string" name="attacktype2_txt"/>
+              <xs:element type="xs:int" name="attacktype3"/>
+              <xs:element type="xs:string" name="attacktype3_txt"/>
+              <xs:element type="xs:int" name="targtype1"/>
+              <xs:element type="xs:string" name="targtype1_txt"/>
+              <xs:element type="xs:int" name="targsubtype1"/>
+              <xs:element type="xs:string" name="targsubtype1_txt"/>
+              <xs:element type="xs:string" name="corp1"/>
+              <xs:element type="xs:string" name="target1"/>
+              <xs:element type="xs:int" name="natlty1"/>
+              <xs:element type="xs:string" name="natlty1_txt"/>
+              <xs:element type="xs:int" name="targtype2"/>
+              <xs:element type="xs:string" name="targtype2_txt"/>
+              <xs:element type="xs:int" name="targsubtype2"/>
+              <xs:element type="xs:string" name="targsubtype2_txt"/>
+              <xs:element type="xs:string" name="corp2"/>
+              <xs:element type="xs:string" name="target2"/>
+              <xs:element type="xs:int" name="natlty2"/>
+              <xs:element type="xs:string" name="natlty2_txt"/>
+              <xs:element type="xs:int" name="targtype3"/>
+              <xs:element type="xs:string" name="targtype3_txt"/>
+              <xs:element type="xs:int" name="targsubtype3"/>
+              <xs:element type="xs:string" name="targsubtype3_txt"/>
+              <xs:element type="xs:string" name="corp3"/>
+              <xs:element type="xs:string" name="target3"/>
+              <xs:element type="xs:int" name="natlty3"/>
+              <xs:element type="xs:string" name="natlty3_txt"/>
+              <xs:element type="xs:string" name="gname"/>
+              <xs:element type="xs:string" name="gsubname"/>
+              <xs:element type="xs:string" name="gname2"/>
+              <xs:element type="xs:string" name="gsubname2"/>
+              <xs:element type="xs:string" name="gname3"/>
+              <xs:element type="xs:string" name="gsubname3"/>
+              <xs:element type="xs:string" name="motive"/>
+              <xs:element type="xs:string" name="guncertain1"/>
+              <xs:element type="xs:string" name="guncertain2"/>
+              <xs:element type="xs:string" name="guncertain3"/>
+              <xs:element type="xs:string" name="individual"/>
+              <xs:element type="xs:int" name="nperps"/>
+              <xs:element type="xs:int" name="nperpcap"/>
+              <xs:element type="xs:string" name="claimed"/>
+              <xs:element type="xs:int" name="claimmode"/>
+              <xs:element type="xs:string" name="claimmode_txt"/>
+              <xs:element type="xs:string" name="claim2"/>
+              <xs:element type="xs:int" name="claimmode2"/>
+              <xs:element type="xs:string" name="claimmode2_txt"/>
+              <xs:element type="xs:string" name="claim3"/>
+              <xs:element type="xs:int" name="claimmode3"/>
+              <xs:element type="xs:string" name="claimmode3_txt"/>
+              <xs:element type="xs:string" name="compclaim"/>
+              <xs:element type="xs:int" name="weaptype1"/>
+              <xs:element type="xs:string" name="weaptype1_txt"/>
+              <xs:element type="xs:int" name="weapsubtype1"/>
+              <xs:element type="xs:string" name="weapsubtype1_txt"/>
+              <xs:element type="xs:int" name="weaptype2"/>
+              <xs:element type="xs:string" name="weaptype2_txt"/>
+              <xs:element type="xs:int" name="weapsubtype2"/>
+              <xs:element type="xs:string" name="weapsubtype2_txt"/>
+              <xs:element type="xs:int" name="weaptype3"/>
+              <xs:element type="xs:string" name="weaptype3_txt"/>
+              <xs:element type="xs:int" name="weapsubtype3"/>
+              <xs:element type="xs:string" name="weapsubtype3_txt"/>
+              <xs:element type="xs:int" name="weaptype4"/>
+              <xs:element type="xs:string" name="weaptype4_txt"/>
+              <xs:element type="xs:int" name="weapsubtype4"/>
+              <xs:element type="xs:string" name="weapsubtype4_txt"/>
+              <xs:element type="xs:string" name="weapdetail"/>
+              <xs:element type="xs:int" name="nkill"/>
+              <xs:element type="xs:int" name="nkillus"/>
+              <xs:element type="xs:int" name="nkillter"/>
+              <xs:element type="xs:int" name="nwound"/>
+              <xs:element type="xs:int" name="nwoundus"/>
+              <xs:element type="xs:int" name="nwoundte"/>
+              <xs:element type="xs:int" name="property"/>
+              <xs:element type="xs:int" name="propextent"/>
+              <xs:element type="xs:string" name="propextent_txt"/>
+              <xs:element type="xs:int" name="propvalue"/>
+              <xs:element type="xs:string" name="propcomment"/>
+              <xs:element type="xs:string" name="ishostkid"/>
+              <xs:element type="xs:int" name="nhostkid"/>
+              <xs:element type="xs:int" name="nhostkidus"/>
+              <xs:element type="xs:int" name="nhours"/>
+              <xs:element type="xs:int" name="ndays"/>
+              <xs:element type="xs:string" name="divert"/>
+              <xs:element type="xs:string" name="kidhijcountry"/>
+              <xs:element type="xs:string" name="ransom"/>
+              <xs:element type="xs:int" name="ransomamt"/>
+              <xs:element type="xs:int" name="ransomamtus"/>
+              <xs:element type="xs:int" name="ransompaid"/>
+              <xs:element type="xs:int" name="ransompaidus"/>
+              <xs:element type="xs:string" name="ransomnote"/>
+              <xs:element type="xs:int" name="hostkidoutcome"/>
+              <xs:element type="xs:string" name="hostkidoutcome_txt"/>
+              <xs:element type="xs:string" name="nreleased"/>
+              <xs:element type="xs:string" name="addnotes"/>
+              <xs:element type="xs:string" name="scite1"/>
+              <xs:element type="xs:string" name="scite2"/>
+              <xs:element type="xs:string" name="scite3"/>
+              <xs:element type="xs:string" name="dbsource"/>
+              <xs:element type="xs:int" name="INT_LOG"/>
+              <xs:element type="xs:int" name="INT_IDEO"/>
+              <xs:element type="xs:int" name="INT_MISC"/>
+              <xs:element type="xs:int" name="INT_ANY"/>
+              <xs:element type="xs:string" name="related"/>
+
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

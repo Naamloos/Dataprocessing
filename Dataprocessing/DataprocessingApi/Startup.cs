@@ -2,17 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Xml.Serialization;
 using DatabaseHelper;
+using DatabaseHelper.Models;
 using DataprocessingApi.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace DataprocessingApi
 {
@@ -20,7 +26,7 @@ namespace DataprocessingApi
     {
         private Database database;
         private ConfigFile configFile;
-
+        private IsoCountries isoCountries;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,6 +35,8 @@ namespace DataprocessingApi
 
             // connecting to database.
             database = new Database(configFile.DbHost, configFile.DbName, configFile.DbUser, configFile.DbPass);
+
+            isoCountries = IsoCountries.Load();
         }
 
         public IConfiguration Configuration { get; }
@@ -45,6 +53,15 @@ namespace DataprocessingApi
 
             // Adding database dependency
             services.AddSingleton(typeof(Database), database);
+            services.AddSingleton(typeof(IsoCountries), isoCountries);
+
+            // cross origin requests
+            services.AddCors(o => o.AddPolicy("publicpolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
 
             // Setting up swagger documentation generation
             services.AddSwaggerGen(c =>
@@ -57,9 +74,14 @@ namespace DataprocessingApi
                 c.SchemaFilter<CustomXmlSchemaFilter>();
 
                 // I want to use my xmldocs for api info.
-                var filePath = Path.Combine(System.AppContext.BaseDirectory, "DataprocessingApi.xml");
+                var filePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DataprocessingApi.xml");
                 c.IncludeXmlComments(filePath);
             });
+        }
+
+        public void Register(HttpConfiguration config)
+        {
+            config.Formatters.XmlFormatter.UseXmlSerializer = true;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,6 +117,18 @@ namespace DataprocessingApi
             dfo.DefaultFileNames.Add("index.html");
             app.UseDefaultFiles(dfo);
             app.UseStaticFiles();
+
+            // Voor serven van schemas
+            app.UseFileServer(new FileServerOptions()
+            {
+                RequestPath = "/schemas",
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(
+                        // Getting current directory the exe/dll is in (dont remember which I compiled lol)
+                        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                        "schemas")
+                    )
+            });
         }
     }
 }

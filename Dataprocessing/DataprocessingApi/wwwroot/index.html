@@ -3,6 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/6.12.0/ajv.min.js"></script>
+    <script src="/include/simpletype-validator.js"></script>
+    <script src="/include/xmljson.js"></script>
+    <script src="/include/xmlparser.js"></script>
+    <script src="/include/xsdoptions.js"></script>
+    <script src="/include/xmlschema.js"></script>
+
+    <script src="/include/script.js"></script>
 </head>
 <body>
     <h1>Dataprocessing front end by Ryan de Jonge @ NHL Stenden</h1>
@@ -10,5 +18,14 @@
     <p>API documentation available <a href="/docs/">here</a>.</p>
     <br /><br /><br />
     <h1>I guess this should be obvious, but <big>WIP</big></h1>
+    <br />
+    <select id="reqtype">
+        <option value="application/xml">XML</option>
+        <option value="application/json">JSON</option>
+    </select>
+
+    <button id="startbtn" onclick="start();">Start visualization</button>
+    <p id="state">Ready</p>
+    <h1 style="color:red">REMINDER TO SELF: CHANGE CASING ON XML STUFF.</h1>
 </body>
 </html>

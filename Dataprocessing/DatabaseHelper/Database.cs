@@ -32,7 +32,7 @@ namespace DatabaseHelper
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL($"server={server};database={database};user={user};password={password}");
+            optionsBuilder.UseMySQL($"server={server};database={database};user={user};password={password}; convert zero datetime=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

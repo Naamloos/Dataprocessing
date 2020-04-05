@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:element name="ArrayOfYoutubeTrendingVideo">
+    <xs:complexType>
+      <xs:sequence>
+
+        <xs:element name="YoutubeTrendingVideo" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+
+              <xs:element name="VideoId" type="xs:string"></xs:element>
+              <xs:element name="TrendingDate" type="xs:dateTime"></xs:element>
+              <xs:element name="Title" type="xs:string"></xs:element>
+              <xs:element name="ChannelTitle" type="xs:string"></xs:element>
+              <xs:element name="CategoryId" type="xs:int"></xs:element>
+              <xs:element name="PublishTime" type="xs:dateTime"></xs:element>
+              <xs:element name="Tags" type="xs:string"></xs:element>
+              <xs:element name="Views" type="xs:int"></xs:element>
+              <xs:element name="Likes" type="xs:int"></xs:element>
+              <xs:element name="Dislikes" type="xs:int"></xs:element>
+              <xs:element name="CommentCount" type="xs:int"></xs:element>
+              <xs:element name="ThumbnailLink" type="xs:string"></xs:element>
+              <xs:element name="CommentsDisabled" type="xs:boolean"></xs:element>
+              <xs:element name="RatingsDisabled" type="xs:boolean"></xs:element>
+              <xs:element name="VideoErrorOrRemoved" type="xs:boolean"></xs:element>
+              <xs:element name="Description" type="xs:string"></xs:element>
+              <xs:element name="CountryCode" type="xs:string"></xs:element>
+
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

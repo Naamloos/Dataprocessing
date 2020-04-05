@@ -14,46 +14,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/6.12.0/ajv.min.js"></script>
     <!-- own script file -->
     <script src="/include/script.js"></script>
+    <!-- styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/include/style.css">
 </head>
 <body>
     <h1>Dataprocessing front end by Ryan de Jonge @ NHL Stenden</h1>
-    <p>We should all be glad I'm not a front end designer.</p>
+    <p>The thing that makes everyone glad I am not a front end developer.</p>
     <p>API documentation available <a href="/docs/">here</a>.</p>
-    <select id="reqtype">
-        <option value="application/xml">XML</option>
-        <option value="application/json">JSON</option>
-    </select>
+    <p>
+        <select id="reqtype">
+            <option value="application/xml">XML</option>
+            <option value="application/json">JSON</option>
+        </select>
 
-    <select id="region">
-        <option value="US">United States</option>
-        <option value="MX">Mexico</option>
-        <option value="FR">France</option>
-        <option value="DE">Germany</option>
-        <option value="GB">United Kingdom</option>
-        <option value="CA">Canada</option>
-        <option value="JP">Japan</option>
-    </select>
+        <select id="region">
+            <option value="US">United States</option>
+            <option value="MX">Mexico</option>
+            <option value="FR">France</option>
+            <option value="DE">Germany</option>
+            <option value="GB">United Kingdom</option>
+            <option value="CA">Canada</option>
+            <option value="JP">Japan</option>
+        </select>
 
-    <input type="date" id="datepicker"
-           value="2017-11-14"
-           min="2017-11-14" max="2018-01-09">
+        <input type="date" id="datepicker"
+               value="2017-11-14"
+               min="2017-11-14" max="2018-01-09">
 
-    <button id="startbtn" onclick="start();">Start visualization</button>
-    <p id="state">Ready</p>
+        <button id="startbtn" onclick="start();">Start visualization</button>
+    </p>
+    <p id="state" style="color:blue">Ready</p>
     <h2>Trending songs for selected date:</h2>
-    <p id="topsong" style="display: inline-block"></p>
-    <br />
-    <p>Bars represent the amount of times a song was streamed.</p>
+    <p id="topsong"></p>
+    <p>Bars represent the amount of times a song was streamed. Click a bar to view the song.</p>
     <canvas id="spotifychart" style="display: inline-block; max-width: 80vw; max-height: 75vh;"></canvas>
 
     <h2>Trending videos for selected date:</h2>
-    <p id="topvideo" style="display: inline-block"></p>
-    <br />
-    <p>Bars represent the amount of times a video was liked.</p>
+    <p id="topvideo"></p>
+    <p>Bars represent the amount of times a video was liked. Click a bar to view the video.</p>
     <canvas id="youtubechart" style="display: inline-block; max-width: 80vw; max-height: 75vh;"></canvas>
 
-    <p>Bars represent the amount of times a weapon was used.</p>
     <h2>Type of weapons used in attacks in this country for selected year:</h2>
+    <p id="noresults_terr"></p>
+    <p>Bars represent the amount of times a weapon was used.</p>
     <canvas id="terroristchart" style="display: inline-block; max-width: 80vw; max-height: 75vh;"></canvas>
 </body>
 </html>

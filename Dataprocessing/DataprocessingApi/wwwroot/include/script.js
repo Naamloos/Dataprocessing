@@ -204,17 +204,22 @@ function FillTerrorismGraph() {
 function CheckDone() {
     if (trendingsongs != null && trendingvideos != null && terrorismevents != null) {
         State.innerHTML = "Done! :)";
+        State.style.color = "Green";
     }
 }
 
 function start() {
     // Remove start button
     document.getElementById("startbtn").remove();
+    document.getElementById("datepicker").disabled = true;
+    document.getElementById("region").disabled = true;
+    document.getElementById("reqtype").disabled = true;
     InputDate = document.getElementById("datepicker").value.split("-");
     Region = document.getElementById("region").value;
     console.debug(InputDate);
     State = document.getElementById("state");
     State.innerHTML = "Working...";
+    State.style.color = "Cyan";
 
     // Getting request type
     var select = document.getElementById("reqtype");
@@ -241,7 +246,7 @@ function DownloadTerrorismEvents(region) {
                     FillTerrorismGraph();
                 } else {
                     terrorismevents = 1;
-                    // return error
+                    document.getElementById("noresults_terr").innerHTML = "Query unfortunately yielded no results.";
                 }
 
                 CheckDone();

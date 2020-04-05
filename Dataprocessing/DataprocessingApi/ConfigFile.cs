@@ -29,6 +29,10 @@ namespace DataprocessingApi
             {
                 File.Create("config.json").Close();
                 File.WriteAllText("config.json", JsonConvert.SerializeObject(new ConfigFile()));
+                Console.WriteLine("New config generated. Please fill in your config and restart.");
+                Console.WriteLine("Press any button (not the on/off button or a mouse button) to exit.");
+                Console.ReadKey();
+                Environment.Exit(0);
             }
 
             var cfg = File.ReadAllText("config.json");

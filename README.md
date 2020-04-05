@@ -1,5 +1,5 @@
 # Dataprocessing-Opdrachten
 Assignments for Dataprocessing @ NHL Stenden
 
-## Database
-Info about the database can be found [here](https://github.com/Naamloos/Dataprocessing-Opdrachten/blob/master/Database/).
+## Setup manual
+A setup manual can be found in the `Manual` directory. Start with the `README.md` file in that directory.

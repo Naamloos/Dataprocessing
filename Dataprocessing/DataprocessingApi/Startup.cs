@@ -1,23 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using DatabaseHelper;
-using DatabaseHelper.Models;
 using DataprocessingApi.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace DataprocessingApi
 {
@@ -43,6 +33,7 @@ namespace DataprocessingApi
             // connecting to database.
             database = new Database(configFile.DbHost, configFile.DbName, configFile.DbUser, configFile.DbPass);
 
+            // Loading iso countries json file
             isoCountries = IsoCountries.Load();
         }
 
@@ -59,7 +50,8 @@ namespace DataprocessingApi
         {
             services.AddControllers();
 
-            // Return XML or JSON depending on headers
+            // Return XML or JSON depending on headers. 
+            // ASP.Net Core doesn't ship with XML by default.
             services.AddMvc()
                 .AddXmlSerializerFormatters()
                 .AddXmlDataContractSerializerFormatters();
@@ -101,7 +93,7 @@ namespace DataprocessingApi
         /// <param name="env">environment to use.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // Deafult aspnet stuff
+            // Default aspnet stuff
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -132,7 +124,7 @@ namespace DataprocessingApi
             app.UseDefaultFiles(dfo);
             app.UseStaticFiles();
 
-            // Voor serven van schemas
+            // File server to serve schemas
             app.UseFileServer(new FileServerOptions()
             {
                 RequestPath = "/schemas",

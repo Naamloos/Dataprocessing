@@ -44,16 +44,21 @@ namespace DataprocessingApi
         /// <returns></returns>
         public static ConfigFile Load()
         {
+            // File exist check
             if(!File.Exists("config.json"))
             {
+                // Create file, write a default config to it and tell the user to fill it out.
                 File.Create("config.json").Close();
                 File.WriteAllText("config.json", JsonConvert.SerializeObject(new ConfigFile()));
+
                 Console.WriteLine("New config generated. Please fill in your config and restart.");
                 Console.WriteLine("Press any button (not the on/off button or a mouse button) to exit.");
                 Console.ReadKey();
+
                 Environment.Exit(0);
             }
 
+            // Load config and return.
             var cfg = File.ReadAllText("config.json");
             return JsonConvert.DeserializeObject<ConfigFile>(cfg);
         }

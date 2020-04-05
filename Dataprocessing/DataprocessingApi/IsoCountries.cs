@@ -31,6 +31,7 @@ namespace DataprocessingApi
         {
             var iso = new IsoCountries();
 
+            // Because this is a json object and not an array we'll have to manually map this to a dictionary.
             var jobject = JObject.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "json/iso3166.json")));
             foreach(var token in jobject)
             {

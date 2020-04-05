@@ -49,6 +49,7 @@ namespace DataprocessingApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<SpotifyTrendingSong>> Get(int day, int month, int year, string region, int limit = 25)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)
@@ -63,14 +64,16 @@ namespace DataprocessingApi.Controllers
                     return BadRequest("Invalid accept header! (application/xml OR application/json)");
             }
 
+            // create datetime object from request values
             var date = new DateTime(year, month, day);
 
             // net zo mooi als de gemiddelde SQL query.
             return database.SpotifyData
-                .Where(x => 
-                x.Date == date
-                && x.Region.ToLower() == region.ToLower()
-                && x.Position <= limit)?.ToList();
+                .Where(x => // get all objects where
+                x.Date == date // the date matches
+                && x.Region.ToLower() == region.ToLower() // the region matches
+                && x.Position <= limit) // Position is within the limit
+                ?.ToList(); // And return a list (to fix some compilation errors)
         }
 
         /// <summary>
@@ -85,6 +88,7 @@ namespace DataprocessingApi.Controllers
         [HttpDelete]
         public ActionResult<SpotifyTrendingSong> Delete(int position, int day, int month, int year, string region)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)
@@ -99,8 +103,10 @@ namespace DataprocessingApi.Controllers
                     return BadRequest("Invalid accept header! (application/xml OR application/json)");
             }
 
+            // make date object from request values
             var date = new DateTime(year, month, day);
 
+            // If there's no such object to delete, return error
             if (!database.SpotifyData.Any(x => 
                 x.Position == position 
                 && x.Region == region
@@ -109,14 +115,17 @@ namespace DataprocessingApi.Controllers
                 return Conflict("No such top song to delete!");
             }
 
+            // Find the value to delete
             var deletable = database.SpotifyData.First(x =>
                 x.Position == position
                 && x.Region == region
                 && x.Date == date);
 
+            // and delete it
             database.SpotifyData.Remove(deletable);
             database.SaveChanges();
 
+            // give it back to the user too.
             return deletable;
         }
 
@@ -128,6 +137,7 @@ namespace DataprocessingApi.Controllers
         [HttpPut]
         public ActionResult<SpotifyTrendingSong> Put([FromBody]SpotifyTrendingSong updatedSong)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)
@@ -142,6 +152,7 @@ namespace DataprocessingApi.Controllers
                     return BadRequest("Invalid accept header! (application/xml OR application/json)");
             }
 
+            // if no such value to update, return an error.
             if (!database.SpotifyData.Any(x =>
                 x.Position == updatedSong.Position
                 && x.Date == updatedSong.Date
@@ -150,14 +161,17 @@ namespace DataprocessingApi.Controllers
                 return Conflict("No such song with this Region/date/postion combo to update!");
             }
 
+            // Get the old value
             var oldSong = database.SpotifyData.First(x =>
                 x.Position == updatedSong.Position
                 && x.Date == updatedSong.Date
                 && x.Region == updatedSong.Region);
 
+            // Update with the new value
             database.SpotifyData.Update(updatedSong);
             database.SaveChanges();
 
+            // Return the old value
             return oldSong;
         }
 

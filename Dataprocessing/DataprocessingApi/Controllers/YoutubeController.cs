@@ -45,6 +45,7 @@ namespace DataprocessingApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<YoutubeTrendingVideo>> Get(int day, int month, int year, string region, int limit = 25)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)
@@ -59,14 +60,16 @@ namespace DataprocessingApi.Controllers
                     return BadRequest("Invalid accept header! (application/xml OR application/json)");
             }
 
+            // Make date from request
             var date = new DateTime(year, month, day);
 
             var reg = region.ToUpper();
 
-            return database.Youtube.OrderByDescending(x => x.Likes).Where(x => 
+            return database.Youtube.OrderByDescending(x => x.Likes) // Order by descending first because that seems to be the fastest option.
+                .Where(x => 
                 x.CountryCode == reg
                 && x.TrendingDate.Date == date)
-                .Take(limit)? // Maximaal aantal returnen
+                .Take(limit)? // Return max amount
                 .ToList();
         }
 
@@ -82,6 +85,7 @@ namespace DataprocessingApi.Controllers
         [HttpDelete]
         public ActionResult<YoutubeTrendingVideo> Delete(string videoid, int day, int month, int year, string region)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)
@@ -125,6 +129,7 @@ namespace DataprocessingApi.Controllers
         [HttpPut]
         public ActionResult<YoutubeTrendingVideo> Put([FromBody]YoutubeTrendingVideo updatedVideo)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)
@@ -166,6 +171,7 @@ namespace DataprocessingApi.Controllers
         [HttpPost]
         public ActionResult<YoutubeTrendingVideo> Post([FromBody]YoutubeTrendingVideo newVideo)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)

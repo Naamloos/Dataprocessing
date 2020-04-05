@@ -17,10 +17,10 @@ namespace DatabaseHelper
         public DbSet<YoutubeTrendingVideo> Youtube { get; set; }
         public DbSet<AuthKey> AuthKeys { get; set; }
 
-        private string server;
-        private string database;
-        private string user;
-        private string password;
+        private readonly string server;
+        private readonly string database;
+        private readonly string user;
+        private readonly string password;
 
         public Database(string server, string database, string user, string password)
         {
@@ -32,6 +32,7 @@ namespace DatabaseHelper
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            // MySQL connection string
             optionsBuilder.UseMySQL($"server={server};database={database};user={user};password={password}; convert zero datetime=True");
         }
 
@@ -52,7 +53,7 @@ namespace DatabaseHelper
         /// <summary>
         /// Lazy way to fix handling multiple connections
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A new database connection</returns>
         public Database NewConnection()
         {
             return new Database(this.server, this.database, this.user, this.password);

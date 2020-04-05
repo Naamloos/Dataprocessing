@@ -45,6 +45,7 @@ namespace DataprocessingApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<TerrorismEvent>> Get(string region, int year)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)
@@ -59,6 +60,7 @@ namespace DataprocessingApi.Controllers
                     return BadRequest("Invalid accept header! (application/xml OR application/json)");
             }
 
+            // return all terrorism events in the given region/year combo
             var country = iso.Countries[region.ToUpper()];
             return database.Gtd.Where(x => 
                 x.country_txt.ToLower() == country.ToLower()
@@ -74,6 +76,7 @@ namespace DataprocessingApi.Controllers
         [HttpDelete]
         public ActionResult<TerrorismEvent> Delete(int eventid)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)
@@ -91,9 +94,10 @@ namespace DataprocessingApi.Controllers
 
             if (!database.Gtd.Any(x => x.eventid == eventid))
             {
-                return Conflict("No such top song to delete!");
+                return Conflict("No such event to delete!");
             }
 
+            // deleting by eventid
             var deletable = database.Gtd.First(x => x.eventid == eventid);
 
             database.Gtd.Remove(deletable);
@@ -110,6 +114,7 @@ namespace DataprocessingApi.Controllers
         [HttpPut]
         public ActionResult<TerrorismEvent> Put([FromBody]TerrorismEvent updatedEvent)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)
@@ -126,9 +131,10 @@ namespace DataprocessingApi.Controllers
 
             if (!database.Gtd.Any(x => x.eventid == updatedEvent.eventid))
             {
-                return Conflict("No such song with this Region/date/postion combo to update!");
+                return Conflict("No such event with this eventid to update!");
             }
 
+            //update an event and return the old value
             var oldEvent = database.Gtd.First(x => x.eventid == updatedEvent.eventid);
 
             database.Gtd.Update(updatedEvent);
@@ -145,6 +151,7 @@ namespace DataprocessingApi.Controllers
         [HttpPost]
         public ActionResult<TerrorismEvent> Post([FromBody]TerrorismEvent newEvent)
         {
+            // Add schema header related to accept data type
             this.HttpContext.Request.Headers.TryGetValue("Accept", out var accept);
 
             switch (accept)
@@ -164,7 +171,7 @@ namespace DataprocessingApi.Controllers
             // return new object on success.
             if (database.Gtd.Any(x => x.eventid == newEvent.eventid))
             {
-                return Conflict("Song with this Region/date/postion combo already exists!");
+                return Conflict("Event with this eventid already exists!");
             }
 
             database.Gtd.Add(newEvent);
